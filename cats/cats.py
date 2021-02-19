@@ -31,13 +31,15 @@ def choose(paragraphs, select, k):
     """
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
-    leng = len(paragraphs) - 1
-    if k > leng:
+    valid_para = []
+    for para in paragraphs:
+        if select(para) == True:
+            valid_para.append(para)
+    length = len(valid_para) - 1
+    if k > length:
         return ''
     else:
-        para = paragraphs[k]
-        del paragraphs[k]
-        return para
+        return valid_para[k]
     # END PROBLEM 1
 
 
