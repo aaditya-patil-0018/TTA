@@ -31,6 +31,13 @@ def choose(paragraphs, select, k):
     """
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
+    leng = len(paragraphs) - 1
+    if k > leng:
+        return ''
+    else:
+        para = paragraphs[k]
+        del paragraphs[k]
+        return para
     # END PROBLEM 1
 
 
