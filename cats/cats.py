@@ -31,11 +31,11 @@ def choose(paragraphs, select, k):
     """
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
-    valid_para = []
+    valid_para = [] # List for sorted elements after the select function takes over
     for para in paragraphs:
-        if select(para) == True:
-            valid_para.append(para)
-    length = len(valid_para) - 1
+        if select(para) == True: # If condition of select function meets with the specific element in paragraph it will fire this statement
+            valid_para.append(para) # This will append the element in the valid_para list
+    length = len(valid_para) - 1  # This will tell the length of the list
     if k > length:
         return ''
     else:
@@ -59,6 +59,16 @@ def about(topic):
     assert all([lower(x) == x for x in topic]), 'topics should be lowercase.'
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+    def slct(para):
+        for tp in topic:
+            sorted_para = remove_punctuation(para) # This will remove Punctuation
+            sorted_para = lower(sorted_para)    # This will turn the Paragraph into lowercase
+            sorted_para = split(sorted_para) # This will split the paragraph into individual words
+            if tp in sorted_para:
+                return True # If any word in topic matches with any word in sorted_para it will return True
+        return False
+
+    return slct
     # END PROBLEM 2
 
 
@@ -89,6 +99,25 @@ def accuracy(typed, reference):
     reference_words = split(reference)
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    if len(typed_words) == 0 and len(reference_words) == 0:
+        return 100.0
+    elif len(typed_words) == 0 and len(reference_words) != 0:
+        return 0.0
+    else:
+        count_of_match = 0
+        k = 0
+        if len(typed_words) < len(reference_words):
+            for k in range(0, len(typed_words)):
+                if typed_words[k] == reference_words[k]:
+                    count_of_match += 1
+                k += 1
+            return count_of_match / len(typed_words) * 100
+        else:
+            for k in range(0, len(reference_words)):
+                if typed_words[k] == reference_words[k]:
+                    count_of_match += 1
+                k += 1
+            return count_of_match / len(typed_words) * 100
     # END PROBLEM 3
 
 
@@ -107,6 +136,14 @@ def wpm(typed, elapsed):
     assert elapsed > 0, 'Elapsed time must be positive'
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    length_of_typed_words = len(typed)
+    if length_of_typed_words == 0:
+        return 0.0
+    else:
+        average_words = length_of_typed_words / 5
+        words_typed = average_words / elapsed
+        words_per_minute = words_typed * 60
+        return words_per_minute
     # END PROBLEM 4
 
 
